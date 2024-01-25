@@ -9,6 +9,8 @@
  This program was designed to make classroom Sumo robots using the Robo-Sumo
  competitions rules on the mirobo site (https://mirobo.tech/robo-sumo-rules)
  and can easily be adapted for making other kinds of robots using ARPS.
+
+ Find introductory ARPS learning activities here: https://mirobo.tech/arps
 */
 
 // Define I/O pins used for human interface devices
@@ -63,8 +65,8 @@ int SW3state;
 int SW4state;
 int SW5state;
 int mode;               // Current operating mode
-int lineFloor;          // Left floor sensor state
-int lineFLoor;          // Right floor sensor state
+int floorLeft;          // Left floor sensor state
+int floorRight;         // Right floor sensor state
 
 // Setup code runs once to configure I/O pins before running main loop
 void setup() {
@@ -86,7 +88,7 @@ void setup() {
   pinMode(H1,INPUT);    // Define unused header pins as input
   pinMode(TRIG,OUTPUT); // H2/TRIG SONAR output (if installed)
   pinMode(ECHO,INPUT);  // H3/ECHO SONAR input
-  pinMode(H4,INPUT);	  // Define unused header pins as input
+  pinMode(H4,INPUT);    // Define unused header pins as input
   pinMode(VTMP,INPUT);
   pinMode(VDIV,INPUT);
 
@@ -98,8 +100,9 @@ void setup() {
 
 // Main loop code repeats forever
 void loop() {
-  // While() loops within loop() are like mini self-contained programs.
+  // while() loops within loop() are like mini self-contained programs.
   // Switch between the while() loops by changing the mode variable.
+
   while(mode == STARTUP) {
     // Wait for a button to be pressed. If the button is pressed,
     // start a 5s countdown and then switch to SEARCH mode as shown:
@@ -107,15 +110,15 @@ void loop() {
   }
 
   while(mode == SEARCH) {
-    // Use the SONAR to look for the enemy robot while monitoring the
-    // floor sensors to stay in the Sumo ring. If an enemy robot is
-    // within range, switch to ATTACK mode.
+    // Use the SONAR to look for the opposing robot while monitoring
+    // the floor sensors to stay in the Sumo ring. If an opposing
+    // robot is within range, switch to ATTACK mode.
   }
 
   while(mode == ATTACK) {
-    // Push the enemby robot out of the SUMO ring while monitoring the
-    // floor sensors to stay in the ring. If the enemy robot is no
-    // longer detected, switch to SEARCH mode.
+    // Push the opposing robot out of the SUMO ring while monitoring
+    // the floor sensors to stay in the ring. If the opposing robot is
+    // no longer detected, switch to SEARCH mode.
   }
 }
 
